@@ -1,6 +1,6 @@
 {
-  "appId": "com.sillytavern.android",
-  "appName": "SillyTavern",
+  "appId": "com.lumiverse.android",
+  "appName": "Lumiverse",
   "webDir": "www",
   "server": {
     "androidScheme": "http",
