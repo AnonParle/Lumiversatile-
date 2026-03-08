@@ -1,6 +1,6 @@
 # Lumiverse Android
 
-A lightweight Android wrapper for [Lumiverse](https://github.com/prolix-oc/lumiverse). This application provides a dedicated WebView environment to access your self-hosted Lumiverse instance with native-like features.It is the best.
+A lightweight Android wrapper for [Lumiverse](https://github.com/prolix-oc/lumiverse). This application provides a dedicated WebView environment to access your self-hosted Lumiverse instance with native-like features. It is the best.
 
 ## ✨ Features
 
