@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
-    <title>SillyTavern Launcher</title>
+    <title>Lumiverse</title>
     <link rel="stylesheet" href="style.css">
     <!-- FontAwesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -13,8 +13,43 @@
         <!-- Main Screen -->
         <div id="main-screen">
             <div class="logo-area">
-                <h1>SillyTavern</h1>
-                <p>Launcher</p>
+                <!-- Lumiverse SVG logo mark -->
+                <svg class="logo-svg" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <!-- Outer glow ring -->
+                    <circle cx="40" cy="40" r="36" fill="none" stroke="url(#ringGrad)" stroke-width="2.5" opacity="0.6"/>
+                    <!-- Inner radiant burst -->
+                    <g transform="translate(40,40)">
+                        <line x1="0" y1="-24" x2="0" y2="-30" stroke="url(#rayGrad)" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="0" y1="-24" x2="0" y2="-30" stroke="url(#rayGrad)" stroke-width="2" stroke-linecap="round" transform="rotate(45)"/>
+                        <line x1="0" y1="-24" x2="0" y2="-30" stroke="url(#rayGrad)" stroke-width="2" stroke-linecap="round" transform="rotate(90)"/>
+                        <line x1="0" y1="-24" x2="0" y2="-30" stroke="url(#rayGrad)" stroke-width="2" stroke-linecap="round" transform="rotate(135)"/>
+                        <line x1="0" y1="-24" x2="0" y2="-30" stroke="url(#rayGrad)" stroke-width="2" stroke-linecap="round" transform="rotate(180)"/>
+                        <line x1="0" y1="-24" x2="0" y2="-30" stroke="url(#rayGrad)" stroke-width="2" stroke-linecap="round" transform="rotate(225)"/>
+                        <line x1="0" y1="-24" x2="0" y2="-30" stroke="url(#rayGrad)" stroke-width="2" stroke-linecap="round" transform="rotate(270)"/>
+                        <line x1="0" y1="-24" x2="0" y2="-30" stroke="url(#rayGrad)" stroke-width="2" stroke-linecap="round" transform="rotate(315)"/>
+                    </g>
+                    <!-- Core orb -->
+                    <circle cx="40" cy="40" r="16" fill="url(#coreGrad)"/>
+                    <!-- Inner highlight -->
+                    <circle cx="35" cy="35" r="5" fill="white" opacity="0.25"/>
+                    <defs>
+                        <radialGradient id="coreGrad" cx="40%" cy="35%" r="60%" gradientUnits="userSpaceOnUse" x1="24" y1="24" x2="56" y2="56">
+                            <stop offset="0%" stop-color="#c084fc"/>
+                            <stop offset="50%" stop-color="#818cf8"/>
+                            <stop offset="100%" stop-color="#38bdf8"/>
+                        </radialGradient>
+                        <linearGradient id="ringGrad" x1="0" y1="0" x2="80" y2="80" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stop-color="#c084fc"/>
+                            <stop offset="100%" stop-color="#38bdf8"/>
+                        </linearGradient>
+                        <linearGradient id="rayGrad" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stop-color="#e0aaff"/>
+                            <stop offset="100%" stop-color="#818cf8" stop-opacity="0.3"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <h1>Lumiverse</h1>
+                <p>AI Chat Suite</p>
             </div>
 
             <div class="status-area">
@@ -37,8 +72,8 @@
             </div>
 
             <div class="input-group">
-                <label for="url-input">SillyTavern URL</label>
-                <input type="url" id="url-input" placeholder="http://127.0.0.1:8000" />
+                <label for="url-input">Lumiverse URL</label>
+                <input type="url" id="url-input" placeholder="http://127.0.0.1:7860" />
                 <p class="hint">Enter the full URL including http:// or https://</p>
             </div>
 
