@@ -16,8 +16,8 @@
     }],
     ["@semantic-release/github", {
       "assets": [
-        {"path": "android/app/build/outputs/apk/release/app-release.apk", "label": "SillyTavern-Android-v${nextRelease.version}.apk"},
-        {"path": "android/app/build/outputs/apk/debug/app-debug.apk", "label": "SillyTavern-Android-dev-v${nextRelease.version}.apk"}
+        {"path": "android/app/build/outputs/apk/release/app-release.apk", "label": "Lumiverse-Android-v${nextRelease.version}.apk"},
+        {"path": "android/app/build/outputs/apk/debug/app-debug.apk", "label": "Lumiverse-Android-dev-v${nextRelease.version}.apk"}
       ]
     }]
   ]
