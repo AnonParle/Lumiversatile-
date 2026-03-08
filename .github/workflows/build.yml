@@ -44,17 +44,8 @@ jobs:
           npx cap sync android
           cd android
           chmod +x gradlew
-          if [[ "${{ github.ref }}" == "refs/heads/dev" ]]; then
-            ./gradlew assembleDebug --no-daemon
-            echo "APK_PATH=app/build/outputs/apk/debug/app-debug.apk" >> $GITHUB_ENV
-          else
-            ./gradlew assembleRelease --no-daemon
-            echo "APK_PATH=app/build/outputs/apk/release/app-release.apk" >> $GITHUB_ENV
-          fi
-        env:
-          RELEASE_STORE_PASSWORD: ${{ secrets.RELEASE_STORE_PASSWORD }}
-          RELEASE_KEY_ALIAS: ${{ secrets.RELEASE_KEY_ALIAS }}
-          RELEASE_KEY_PASSWORD: ${{ secrets.RELEASE_KEY_PASSWORD }}
+          ./gradlew assembleDebug --no-daemon
+          echo "APK_PATH=app/build/outputs/apk/debug/app-debug.apk" >> $GITHUB_ENV
 
       - name: Release
         env:
