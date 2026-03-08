@@ -1,8 +1,8 @@
-const STORAGE_KEY = 'sillytavern_url';
-const AUTH_ENABLED_KEY = 'sillytavern_auth_enabled';
-const AUTH_USER_KEY = 'sillytavern_auth_user';
-const AUTH_PASS_KEY = 'sillytavern_auth_pass';
-const BG_MODE_KEY = 'sillytavern_bg_mode';
+const STORAGE_KEY = 'lumiverse_url';
+const AUTH_ENABLED_KEY = 'lumiverse_auth_enabled';
+const AUTH_USER_KEY = 'lumiverse_auth_user';
+const AUTH_PASS_KEY = 'lumiverse_auth_pass';
+const BG_MODE_KEY = 'lumiverse_bg_mode';
 
 // Elements
 const mainScreen = document.getElementById('main-screen');
@@ -24,17 +24,17 @@ const cancelBtn = document.getElementById('cancel-btn');
 
 function init() {
     const storedUrl = localStorage.getItem(STORAGE_KEY);
-    
+
     // Sync auth settings to native side on startup
     syncAuthToNative();
     syncBackgroundToNative();
 
     if (!storedUrl) {
-        // First time open - set default and show settings
-        const defaultUrl = 'http://127.0.0.1:8000';
+        // First time open - set Lumiverse default and auto-connect
+        const defaultUrl = 'http://127.0.0.1:7860';
         localStorage.setItem(STORAGE_KEY, defaultUrl);
         updateDisplay(defaultUrl);
-        showSettings();
+        connect();
     } else {
         // URL exists - auto connect
         updateDisplay(storedUrl);
@@ -58,15 +58,15 @@ function showSettings() {
     mainScreen.classList.add('hidden');
     settingsScreen.classList.remove('hidden');
     urlInput.value = localStorage.getItem(STORAGE_KEY) || '';
-    
+
     const authEnabled = localStorage.getItem(AUTH_ENABLED_KEY) === 'true';
     authToggle.checked = authEnabled;
     authUser.value = localStorage.getItem(AUTH_USER_KEY) || '';
     authPass.value = localStorage.getItem(AUTH_PASS_KEY) || '';
-    
+
     bgToggle.checked = localStorage.getItem(BG_MODE_KEY) === 'true';
     checkBatteryOptimization();
-    
+
     toggleAuthFields();
 }
 
@@ -111,12 +111,12 @@ function saveSettings() {
         if (!/^https?:\/\//i.test(url)) {
             url = 'http://' + url;
         }
-        
+
         const validUrl = new URL(url);
         // Normalize the URL string
         url = validUrl.href;
-        
-        // Remove trailing slash if present for cleaner display/storage (optional but nice)
+
+        // Remove trailing slash if present for cleaner display/storage
         if (url.endsWith('/')) {
              url = url.slice(0, -1);
         }
@@ -126,15 +126,12 @@ function saveSettings() {
     }
 
     localStorage.setItem(STORAGE_KEY, url);
-    
+
     // Save Auth Settings
     localStorage.setItem(AUTH_ENABLED_KEY, authToggle.checked);
     if (authToggle.checked) {
         localStorage.setItem(AUTH_USER_KEY, authUser.value.trim());
         localStorage.setItem(AUTH_PASS_KEY, authPass.value);
-    } else {
-        // Optional: Clear credentials if disabled, or keep them but don't use them
-        // For now, we keep them in storage but won't send them to native if disabled
     }
 
     localStorage.setItem(BG_MODE_KEY, bgToggle.checked);
