@@ -1,9 +1,12 @@
 :root {
-    --primary-color: #ff6b6b;
-    --secondary-color: #4ecdc4;
-    --bg-color: #2f3542;
+    --primary-color: #ffffff;
+    --primary-hover: #cccccc;
+    --secondary-color: #aaaaaa;
+    --bg-color: #000000;
+    --bg-surface: #000000;
     --text-color: #ffffff;
-    --card-bg: #57606f;
+    --card-bg: #111111;
+    --accent-glow: rgba(255, 255, 255, 0.1);
 }
 
 body {
@@ -31,24 +34,50 @@ body {
 }
 
 /* Main Screen */
+.logo-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo-svg {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 0.5rem;
+    filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.3));
+    animation: pulse-glow 3s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+    0%, 100% { filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.2)); }
+    50%       { filter: drop-shadow(0 0 22px rgba(255, 255, 255, 0.5)); }
+}
+
 .logo-area h1 {
     font-size: 2.5rem;
     margin-bottom: 0;
-    color: var(--primary-color);
+    margin-top: 0.25rem;
+    color: #ffffff;
+    letter-spacing: 0.04em;
 }
 
 .logo-area p {
-    margin-top: 0.5rem;
-    font-size: 1.2rem;
-    opacity: 0.8;
+    margin-top: 0.4rem;
+    opacity: 0.5;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-size: 0.85rem;
 }
 
 .status-area {
     background-color: var(--card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     padding: 1rem;
-    border-radius: 10px;
+    border-radius: 12px;
     margin: 2rem 0;
     word-break: break-all;
+    font-size: 0.9rem;
+    color: var(--secondary-color);
 }
 
 /* Buttons */
@@ -57,10 +86,10 @@ button {
     padding: 15px;
     margin: 10px 0;
     border: none;
-    border-radius: 8px;
-    font-size: 1.1rem;
+    border-radius: 10px;
+    font-size: 1.05rem;
     cursor: pointer;
-    transition: transform 0.1s;
+    transition: transform 0.1s, box-shadow 0.2s;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -72,26 +101,57 @@ button:active {
 }
 
 .primary-btn {
-    background-color: var(--primary-color);
-    color: white;
+    background: #ffffff;
+    color: #000000;
+    font-weight: 600;
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+}
+
+.primary-btn:hover {
+    box-shadow: 0 6px 28px rgba(255, 255, 255, 0.2);
 }
 
 .secondary-btn {
     background-color: transparent;
-    border: 2px solid var(--secondary-color);
+    border: 1.5px solid rgba(255, 255, 255, 0.3);
     color: var(--secondary-color);
 }
 
+.secondary-btn:hover {
+    border-color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.text-link {
+    background: none;
+    border: none;
+    color: #aaaaaa;
+    font-size: 0.85rem;
+    text-decoration: underline;
+    width: auto;
+    padding: 8px 0;
+    margin: 0;
+    cursor: pointer;
+}
+
 /* Settings Screen */
+.header h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: #ffffff;
+}
+
 .input-group {
     text-align: left;
-    margin: 2rem 0;
+    margin: 1.5rem 0;
 }
 
 .input-group label {
     display: block;
     margin-bottom: 0.5rem;
-    font-weight: bold;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
 }
 
 input[type="url"],
@@ -99,18 +159,28 @@ input[type="text"],
 input[type="password"] {
     width: 100%;
     padding: 12px;
-    border-radius: 6px;
-    border: none;
-    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background-color: var(--card-bg);
     color: white;
     font-size: 1rem;
     box-sizing: border-box;
+    transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 input[type="url"]:focus,
 input[type="text"]:focus,
 input[type="password"]:focus {
-    outline: 2px solid var(--secondary-color);
+    outline: none;
+    border-color: #ffffff;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+}
+
+.hint {
+    font-size: 0.78rem;
+    opacity: 0.4;
+    margin: 0.4rem 0 0;
+    text-align: left;
 }
 
 .checkbox-group {
@@ -118,39 +188,16 @@ input[type="password"]:focus {
     align-items: center;
     gap: 10px;
     cursor: pointer;
+    margin: 1rem 0;
 }
 
 .checkbox-group input[type="checkbox"] {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
+    accent-color: #ffffff;
     cursor: pointer;
-}
-
-.checkbox-group label {
-    margin-bottom: 0;
-    cursor: pointer;
-}
-
-.hint {
-    font-size: 0.8rem;
-    opacity: 0.6;
-    margin-top: 0.5rem;
 }
 
 .actions {
-    display: flex;
-    gap: 10px;
+    margin-top: 1.5rem;
 }
-
-.text-link {
-    background: none;
-    border: none;
-    color: var(--secondary-color);
-    text-decoration: underline;
-    font-size: 0.9rem;
-    padding: 5px;
-    margin: 0;
-    width: auto;
-    display: inline-block;
-}
-
