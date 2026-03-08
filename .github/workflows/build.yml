@@ -39,8 +39,9 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Generate Lumiverse icons
+      - name: Build Android
         run: |
+          npx cap sync android
           sudo apt-get install -y librsvg2-bin
           cat > /tmp/lumi_icon.svg << 'EOF'
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 108 108">
@@ -65,15 +66,11 @@ jobs:
           rsvg-convert -w 96  -h 96  /tmp/lumi_icon.svg -o $BASE/mipmap-xhdpi/ic_launcher.png
           rsvg-convert -w 144 -h 144 /tmp/lumi_icon.svg -o $BASE/mipmap-xxhdpi/ic_launcher.png
           rsvg-convert -w 192 -h 192 /tmp/lumi_icon.svg -o $BASE/mipmap-xxxhdpi/ic_launcher.png
-          cp $BASE/mipmap-mdpi/ic_launcher.png   $BASE/mipmap-mdpi/ic_launcher_round.png
-          cp $BASE/mipmap-hdpi/ic_launcher.png   $BASE/mipmap-hdpi/ic_launcher_round.png
-          cp $BASE/mipmap-xhdpi/ic_launcher.png  $BASE/mipmap-xhdpi/ic_launcher_round.png
-          cp $BASE/mipmap-xxhdpi/ic_launcher.png $BASE/mipmap-xxhdpi/ic_launcher_round.png
+          cp $BASE/mipmap-mdpi/ic_launcher.png    $BASE/mipmap-mdpi/ic_launcher_round.png
+          cp $BASE/mipmap-hdpi/ic_launcher.png    $BASE/mipmap-hdpi/ic_launcher_round.png
+          cp $BASE/mipmap-xhdpi/ic_launcher.png   $BASE/mipmap-xhdpi/ic_launcher_round.png
+          cp $BASE/mipmap-xxhdpi/ic_launcher.png  $BASE/mipmap-xxhdpi/ic_launcher_round.png
           cp $BASE/mipmap-xxxhdpi/ic_launcher.png $BASE/mipmap-xxxhdpi/ic_launcher_round.png
-
-      - name: Build Android
-        run: |
-          npx cap sync android
           cd android
           chmod +x gradlew
           ./gradlew assembleDebug --no-daemon
