@@ -39,6 +39,38 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
+      - name: Generate Lumiverse icons
+        run: |
+          sudo apt-get install -y librsvg2-bin
+          cat > /tmp/lumi_icon.svg << 'EOF'
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 108 108">
+            <circle cx="54" cy="54" r="36" fill="none" stroke="#C084FC" stroke-width="2" opacity="0.5"/>
+            <line x1="54" y1="22" x2="54" y2="16" stroke="#E0AAFF" stroke-width="2"/>
+            <line x1="69.5" y1="26.5" x2="74" y2="22" stroke="#E0AAFF" stroke-width="2"/>
+            <line x1="76" y1="42" x2="82" y2="42" stroke="#E0AAFF" stroke-width="2"/>
+            <line x1="69.5" y1="57.5" x2="74" y2="62" stroke="#E0AAFF" stroke-width="2"/>
+            <line x1="54" y1="64" x2="54" y2="70" stroke="#E0AAFF" stroke-width="2"/>
+            <line x1="38.5" y1="57.5" x2="34" y2="62" stroke="#E0AAFF" stroke-width="2"/>
+            <line x1="32" y1="42" x2="26" y2="42" stroke="#E0AAFF" stroke-width="2"/>
+            <line x1="38.5" y1="26.5" x2="34" y2="22" stroke="#E0AAFF" stroke-width="2"/>
+            <circle cx="54" cy="44" r="14" fill="#818CF8"/>
+            <circle cx="54" cy="44" r="10" fill="#C084FC"/>
+            <circle cx="49" cy="39" r="5" fill="white" opacity="0.3"/>
+          </svg>
+          EOF
+          BASE=android/app/src/main/res
+          mkdir -p $BASE/mipmap-mdpi $BASE/mipmap-hdpi $BASE/mipmap-xhdpi $BASE/mipmap-xxhdpi $BASE/mipmap-xxxhdpi
+          rsvg-convert -w 48  -h 48  /tmp/lumi_icon.svg -o $BASE/mipmap-mdpi/ic_launcher.png
+          rsvg-convert -w 72  -h 72  /tmp/lumi_icon.svg -o $BASE/mipmap-hdpi/ic_launcher.png
+          rsvg-convert -w 96  -h 96  /tmp/lumi_icon.svg -o $BASE/mipmap-xhdpi/ic_launcher.png
+          rsvg-convert -w 144 -h 144 /tmp/lumi_icon.svg -o $BASE/mipmap-xxhdpi/ic_launcher.png
+          rsvg-convert -w 192 -h 192 /tmp/lumi_icon.svg -o $BASE/mipmap-xxxhdpi/ic_launcher.png
+          cp $BASE/mipmap-mdpi/ic_launcher.png   $BASE/mipmap-mdpi/ic_launcher_round.png
+          cp $BASE/mipmap-hdpi/ic_launcher.png   $BASE/mipmap-hdpi/ic_launcher_round.png
+          cp $BASE/mipmap-xhdpi/ic_launcher.png  $BASE/mipmap-xhdpi/ic_launcher_round.png
+          cp $BASE/mipmap-xxhdpi/ic_launcher.png $BASE/mipmap-xxhdpi/ic_launcher_round.png
+          cp $BASE/mipmap-xxxhdpi/ic_launcher.png $BASE/mipmap-xxxhdpi/ic_launcher_round.png
+
       - name: Build Android
         run: |
           npx cap sync android
